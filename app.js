@@ -42,7 +42,7 @@ Tugas Anda:
             },
             body: JSON.stringify({
                 // Kod BAHARU yang betul:
-                model: "llama-3.1-8b-instant",",
+                model: "llama-3.1-8b-instant",
                 messages: [
                     {
                         role: "user",
