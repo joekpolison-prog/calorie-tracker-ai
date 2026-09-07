@@ -1,4 +1,5 @@
-const OPENROUTER_API_KEY = "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"; 
+// Kunci API OpenRouter anda
+const OPENROUTER_API_KEY = "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"; 
 
 async function analyzeDiet() {
     const prevFoodInput = document.getElementById('prevFood');
@@ -36,11 +37,12 @@ Tugas Anda:
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                "Authorization": `Bearer ${OPENROUTER_API_KEY.trim()}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "meta-llama/llama-3.2-11b-vision-instruct:free", // Model percuma & stabil
+                // Menggunakan model percuma
+                model: "meta-llama/llama-3.2-11b-vision-instruct:free",
                 messages: [
                     {
                         role: "user",
@@ -54,7 +56,7 @@ Tugas Anda:
 
         if (data.error) {
             console.error("Ralat API:", data.error);
-            resultDiv.innerHTML = `<b>Ralat API:</b> ${data.error.message}`;
+            resultDiv.innerHTML = `<b>Ralat API (${data.error.code || 'Error'}):</b> ${data.error.message}`;
             return;
         }
 
