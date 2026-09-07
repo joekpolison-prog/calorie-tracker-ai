@@ -1,5 +1,5 @@
 // Kunci API OpenRouter anda
-const OPENROUTER_API_KEY = "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"; 
+const OPENROUTER_API_KEY = "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"; 
 
 async function analyzeDiet() {
     const prevFoodInput = document.getElementById('prevFood');
