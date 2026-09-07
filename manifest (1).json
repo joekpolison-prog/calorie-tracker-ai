@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "alina calorie tracker",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "joekpolison-prog.github",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "com.alina.calorietracker"
+}
