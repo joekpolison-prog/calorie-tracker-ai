@@ -1,0 +1,17 @@
+{
+  "background_color": "#0cefce",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "alina calorie tracker",
+  "orientation": "portrait",
+  "scope": "/",
+  "short_name": "kami",
+  "start_url": "/https://joekpolison-prog.github.io/calorie-tracker-ai/",
+  "theme_color": "#99fe09",
+  "id": "joekpolison-prog.github",
+  "description": "tracking your calorie intake daily!!!",
+  "lang": "en",
+  "share_target": {
+    "method": "GET"
+  }
+}
