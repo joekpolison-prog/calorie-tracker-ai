@@ -1,5 +1,21 @@
-// Kunci API OpenRouter anda
-const OPENROUTER_API_KEY = "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"; 
+// Fungsi untuk mendapatkan API Key dari simpanan peranti (localStorage)
+function getApiKey() {
+    let key = localStorage.getItem("OPENROUTER_API_KEY");
+    if (!key) {
+        key = prompt("Sila masukkan OpenRouter API Key anda (bermula dengan sk-or-v1-...):");
+        if (key) {
+            key = key.trim();
+            localStorage.setItem("OPENROUTER_API_KEY", key);
+        }
+    }
+    return key;
+}
+
+// Fungsi untuk tukar/kemaskini API Key jika berlaku ralat
+function resetApiKey() {
+    localStorage.removeItem("OPENROUTER_API_KEY");
+    alert("API Key telah dipadam. Sila tekan butang 'Analisis Diet' semula untuk memasukkan kunci baharu.");
+}
 
 async function analyzeDiet() {
     const prevFoodInput = document.getElementById('prevFood');
@@ -8,6 +24,12 @@ async function analyzeDiet() {
 
     if (!currFoodInput || !resultDiv) {
         console.error("DOM elements missing.");
+        return;
+    }
+
+    const apiKey = getApiKey();
+    if (!apiKey) {
+        alert("API Key diperlukan untuk menggunakan perkhidmatan analisis.");
         return;
     }
 
@@ -37,11 +59,10 @@ Tugas Anda:
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${OPENROUTER_API_KEY.trim()}`,
+                "Authorization": `Bearer ${apiKey}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                // Menggunakan model percuma
                 model: "meta-llama/llama-3.2-11b-vision-instruct:free",
                 messages: [
                     {
@@ -56,7 +77,7 @@ Tugas Anda:
 
         if (data.error) {
             console.error("Ralat API:", data.error);
-            resultDiv.innerHTML = `<b>Ralat API (${data.error.code || 'Error'}):</b> ${data.error.message}`;
+            resultDiv.innerHTML = `<b>Ralat API:</b> ${data.error.message} <br><br><button onclick="resetApiKey()">Tukar API Key</button>`;
             return;
         }
 
