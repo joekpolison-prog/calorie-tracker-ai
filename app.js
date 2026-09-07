@@ -11,7 +11,6 @@ function getApiKey() {
     return key;
 }
 
-// Fungsi untuk tukar/kemaskini API Key jika berlaku ralat
 function resetApiKey() {
     localStorage.removeItem("OPENROUTER_API_KEY");
     alert("API Key telah dipadam. Sila tekan butang 'Analisis Diet' semula untuk memasukkan kunci baharu.");
@@ -63,7 +62,8 @@ Tugas Anda:
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "meta-llama/llama-3.2-11b-vision-instruct:free",
+                // Model percuma aktif di OpenRouter
+                model: "google/gemini-2.0-flash-lite-001:free",
                 messages: [
                     {
                         role: "user",
