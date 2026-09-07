@@ -1,4 +1,5 @@
-const GEMINI_API_KEY = "AQ.Ab8RN6KgrtGQWM3eX2H1IK44VmEqO9d01FiamoOef13PqYIBVw"; // Kunci baharu anda
+// Tampal API Key dari Groq yang bermula dengan gsk_...
+const GROQ_API_KEY = "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"; 
 
 async function analyzeDiet() {
     const prevFoodInput = document.getElementById('prevFood');
@@ -18,7 +19,7 @@ async function analyzeDiet() {
         return;
     }
 
-    resultDiv.innerHTML = "Sedang menganalisis dengan Gemini Flash...";
+    resultDiv.innerHTML = "Sedang menganalisis pemakanan anda...";
 
     const promptText = `Anda adalah AI pakar pemakanan. Sila analisis maklumat ini berdasarkan sasaran Caloric Deficit harian (1,650 – 1,750 kcal/hari) dan sasaran Protein (125g – 155g/hari).
 
@@ -33,40 +34,40 @@ Tugas Anda:
 4. Berikan Ulasan Ringkas dan saranan mudah untuk hidangan seterusnya.`;
 
     try {
-        // Menggunakan endpoint gemini-2.0-flash yang menyokong kunci baharu
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
-            {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: promptText }]
-                    }]
-                })
-            }
-        );
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${GROQ_API_KEY}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "llama-3.3-70b-versatile",
+                messages: [
+                    {
+                        role: "user",
+                        content: promptText
+                    }
+                ]
+            })
+        });
 
         const data = await response.json();
 
-        // Menyemak ralat spesifik dari Google API
         if (data.error) {
-            console.error("Ralat Google API:", data.error);
-            resultDiv.innerHTML = `<b>Ralat API (${data.error.code}):</b> ${data.error.message}`;
+            console.error("Ralat API:", data.error);
+            resultDiv.innerHTML = `<b>Ralat API:</b> ${data.error.message}`;
             return;
         }
 
-        if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-            const outputText = data.candidates[0].content.parts[0].text;
+        if (data.choices && data.choices[0]?.message?.content) {
+            const outputText = data.choices[0].message.content;
             resultDiv.innerHTML = outputText.replace(/\n/g, '<br>');
         } else {
-            resultDiv.innerHTML = "Gagal menerima jawapan dari AI (Respon kosong).";
+            resultDiv.innerHTML = "Gagal menerima jawapan dari AI.";
         }
     } catch (error) {
         console.error("Fetch Error:", error);
-        resultDiv.innerHTML = "Ralat Rangkaian/Panggilan: " + error.message;
+        resultDiv.innerHTML = "Ralat Rangkaian: " + error.message;
     }
 }
 
