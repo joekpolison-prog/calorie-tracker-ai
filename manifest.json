@@ -1,17 +1,25 @@
 {
-  "background_color": "#0cefce",
-  "dir": "ltr",
+  "name": "Kami CalorieAI",
+  "short_name": "KamiAI",
+  "description": "Tracking your calorie intake daily using AI.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "name": "alina calorie tracker",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
   "orientation": "portrait",
-  "scope": "/",
-  "short_name": "kami",
-  "start_url": "/https://joekpolison-prog.github.io/calorie-tracker-ai/",
-  "theme_color": "#99fe09",
-  "id": "joekpolison-prog.github",
-  "description": "tracking your calorie intake daily!!!",
-  "lang": "en",
-  "share_target": {
-    "method": "GET"
-  }
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
