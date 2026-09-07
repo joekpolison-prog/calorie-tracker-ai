@@ -1,4 +1,4 @@
-// Tampal API Key dari Groq yang bermula dengan gsk_...
+// Gantikan dengan kunci gsk_ anda
 const GROQ_API_KEY = "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"; 
 
 async function analyzeDiet() {
@@ -41,8 +41,7 @@ Tugas Anda:
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                // Kod BAHARU yang betul:
-                model: "llama-3.1-8b-instant",
+                model: "llama3-8b-8192", // Model stabil standard Groq
                 messages: [
                     {
                         role: "user",
