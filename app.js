@@ -1,5 +1,4 @@
-// Gantikan dengan kunci gsk_ anda
-const GROQ_API_KEY = "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"; 
+const OPENROUTER_API_KEY = "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"; 
 
 async function analyzeDiet() {
     const prevFoodInput = document.getElementById('prevFood');
@@ -34,14 +33,14 @@ Tugas Anda:
 4. Berikan Ulasan Ringkas dan saranan mudah untuk hidangan seterusnya.`;
 
     try {
-        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${GROQ_API_KEY}`,
+                "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama3-8b-8192", // Model stabil standard Groq
+                model: "meta-llama/llama-3.2-11b-vision-instruct:free", // Model percuma & stabil
                 messages: [
                     {
                         role: "user",
